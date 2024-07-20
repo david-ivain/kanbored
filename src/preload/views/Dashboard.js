@@ -7,7 +7,7 @@ const Dashboard = {
 		const boards = await BoardAPI.get();
 		return await ipcRenderer.invoke("render-template", {
 			template: "Dashboard",
-			data: { boards },
+			data: { page: "Boards", breadcrumbs: [], boards },
 		});
 	},
 };

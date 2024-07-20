@@ -36,7 +36,20 @@ ipcMain.handle("render-template", (event, args) => {
 			),
 			"utf-8"
 		)
-		.then((template) => mustache.render(template, args.data))
+		.then((template) =>
+			mustache.render(template, args.data, {
+				header: fs.readFileSync(
+					path.resolve(
+						__dirname,
+						"mainassets",
+						"views",
+						"partials",
+						"header.mustache"
+					),
+					"utf-8"
+				),
+			})
+		)
 		.catch((reason) =>
 			mustache.render(
 				`<div class="404">

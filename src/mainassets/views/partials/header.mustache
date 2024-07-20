@@ -1,0 +1,8 @@
+<div class="flex gap-4 p-4 font-bold">
+	<button class="text-2xl px-4 py-2 leading-4 border border-black rounded" data-click="showDashboard">Home</button>
+	<h1 class="text-4xl">
+	{{# breadcrumbs }}
+		<button data-click="{{ click }}" data-id="{{ target }}">{{ label }}</button> •
+	{{/ breadcrumbs }}
+	{{ page }}</h1>
+</div>

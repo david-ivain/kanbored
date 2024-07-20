@@ -1,10 +1,12 @@
 {{> header }}
 <div class="flex flex-wrap gap-2 p-4">
-	{{#boards}}
-	<div class="cursor-pointer grow-0 shrink-0 basis-80 border rounded drop-shadow p-4" role="button" data-click="showBoard" data-id="{{ id }}">
+	{{#issues}}
+	<div class="cursor-pointer grow-0 shrink-0 basis-80 border rounded drop-shadow p-4" role="button">
 		<h2 class="text-lg font-bold leading-6">{{ name }}</h2>
 		<p class="text-slate-400 text-xs leading-6 before:content-['#']">{{ id }}</p>
+		<p class="text-base leading-5">{{{ type }}}</p>
+		<p class="text-base leading-5">{{{ status }}}</p>
 		<p class="text-base leading-5">{{{ description }}}</p>
 	</div>
-	{{/boards}}
+	{{/issues}}
 </div>
