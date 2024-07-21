@@ -17,7 +17,7 @@ const sampleBoards = [
 				name: "Make Dashboard",
 				description: `Make the dashboard<br/>
 				Tasks (make actual subtasks later):
-				<ul>
+				<ul class="list-disc list-inside">
 				<li>view boards
 				<li>go to board
 				<li>manage boards
@@ -38,7 +38,7 @@ const sampleBoards = [
 				name: "Make Engine",
 				description: `Make the engine<br/>
 				Tasks (make actual subtasks later):
-				<ul>
+				<ul class="list-disc list-inside">
 				<li>display sprites
 				<li>handle inputs
 				<li>physics

@@ -1,8 +1,9 @@
-<div class="flex gap-4 p-4 font-bold">
-	<button class="text-2xl px-4 py-2 leading-4 border border-black rounded" data-click="showDashboard">Home</button>
-	<h1 class="text-4xl">
+<div class="flex items-center gap-4 p-4 bg-darkbg text-lightbg leading-none">
+	<button data-click="showDashboard" class="text-2xl uppercase hover:text-hover">Home</button>
+	<span class="border-l border-lightbg self-stretch"></span>
+	<h1 class="whitespace-nowrap text-2xl">
 	{{# breadcrumbs }}
-		<button data-click="{{ click }}" data-id="{{ target }}">{{ label }}</button> •
+		<button data-click="{{ click }}" data-id="{{ target }}" class="hover:text-hover">{{ label }}</button> •
 	{{/ breadcrumbs }}
 	{{ page }}</h1>
 </div>

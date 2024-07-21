@@ -11,7 +11,11 @@ const Board = {
 			data: {
 				page: boards[0].name,
 				breadcrumbs: [
-					{ click: "showDashboard", target: "null", label: "Boards" },
+					{
+						click: "showDashboard",
+						target: "null",
+						label: "Dashboard",
+					},
 				],
 				issues: boards[0].issues,
 			},
