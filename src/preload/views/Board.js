@@ -6,6 +6,7 @@ const Board = {
 	async get(id) {
 		const boards = await BoardAPI.get(id);
 		if (!boards.length) return "404";
+		const status = ["todo", "wip", "review", "done"];
 		return await ipcRenderer.invoke("render-template", {
 			template: "Board",
 			data: {
@@ -17,7 +18,12 @@ const Board = {
 						label: "Dashboard",
 					},
 				],
-				issues: boards[0].issues,
+				columns: status.map((it) => ({
+					label: it,
+					issues: boards[0].issues.filter(
+						(issue) => issue.status === it
+					),
+				})),
 			},
 		});
 	},

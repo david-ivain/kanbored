@@ -2,9 +2,9 @@
 <div class="flex px-4 pt-4 gap-2">
 	<button type="button" class="rounded px-4 p-2 text-base leading-none before:content-['+\0020'] bg-accent text-lightbg hover:bg-hover">New</button>
 </div>
-<div class="flex flex-wrap gap-2 p-4">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 p-4">
 	{{#boards}}
-	<div class="cursor-pointer grow-0 shrink-0 basis-80 rounded-lg flex flex-col p-4 bg-lightbg border border-border" role="button" data-click="showBoard" data-id="{{ id }}">
+	<div class="cursor-pointer grow-0 shrink-0 basis-80 rounded-lg p-4 bg-lightbg border border-border" role="button" data-click="showBoard" data-id="{{ id }}">
 		<h2 class="text-lg font-bold">{{ name }}</h2>
 		<p class="text-secondarytext text-xs before:content-['#']">{{ id }}</p>
 		<div class="border-t border-border my-2"></div>

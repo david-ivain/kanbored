@@ -37,5 +37,9 @@ module.exports = {
 		"bg-wip",
 		"bg-review",
 		"bg-done",
+		"border-todo",
+		"border-wip",
+		"border-review",
+		"border-done",
 	],
 };

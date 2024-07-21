@@ -25,6 +25,84 @@ const sampleBoards = [
 				status: "wip",
 				type: "feature",
 			},
+			{
+				id: "makedashboard",
+				name: "Make Dashboard",
+				description: `Make the dashboard<br/>
+				Tasks (make actual subtasks later):
+				<ul class="list-disc list-inside">
+				<li>view boards
+				<li>go to board
+				<li>manage boards
+				</ul>`,
+				status: "todo",
+				type: "improvement",
+			},
+			{
+				id: "makedashboard",
+				name: "Make Dashboard",
+				description: `Make the dashboard<br/>
+				Tasks (make actual subtasks later):
+				<ul class="list-disc list-inside">
+				<li>view boards
+				<li>go to board
+				<li>manage boards
+				</ul>`,
+				status: "review",
+				type: "bug",
+			},
+			{
+				id: "makedashboard",
+				name: "Make Dashboard",
+				description: `Make the dashboard<br/>
+				Tasks (make actual subtasks later):
+				<ul class="list-disc list-inside">
+				<li>view boards
+				<li>go to board
+				<li>manage boards
+				</ul>`,
+				status: "wip",
+				type: "feature",
+			},
+			{
+				id: "makedashboard",
+				name: "Make Dashboard",
+				description: `Make the dashboard<br/>
+				Tasks (make actual subtasks later):
+				<ul class="list-disc list-inside">
+				<li>view boards
+				<li>go to board
+				<li>manage boards
+				</ul>`,
+				status: "done",
+				type: "feature",
+			},
+			{
+				id: "makedashboard",
+				name: "Make Dashboard",
+				description: `Make the dashboard<br/>
+				Tasks (make actual subtasks later):
+				<ul class="list-disc list-inside">
+				<li>view boards
+				<li>go to board
+				<li>manage boards
+				</ul>`,
+				status: "wip",
+				type: "feature",
+			},
+			{
+				id: "makedashboard",
+				name: "Make Dashboard",
+				description: `Make the dashboard<br/>
+				Tasks (make actual subtasks later):
+				<ul class="list-disc list-inside">
+				<li>view boards
+				<li>go to board
+				<li>manage boards
+				</ul>`,
+				status: "review",
+				type: "feature",
+			},
 		],
 	},
 	{
@@ -43,7 +121,7 @@ const sampleBoards = [
 				<li>handle inputs
 				<li>physics
 				</ul>`,
-				status: "planned",
+				status: "todo",
 				type: "feature",
 			},
 		],
