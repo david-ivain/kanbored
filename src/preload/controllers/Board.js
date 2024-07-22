@@ -1,9 +1,9 @@
-const { ipcRenderer } = require("electron");
-const BoardAPI = require("../api/BoardAPI");
+import { ipcRenderer } from "electron";
+import BoardAPI from "../api/BoardAPI";
 
 /** @type {View<{id: string}>} */
 const Board = {
-	async get(id) {
+	async get({ id }) {
 		const boards = await BoardAPI.get(id);
 		if (!boards.length) return "404";
 		const status = ["todo", "wip", "review", "done"];
@@ -29,4 +29,4 @@ const Board = {
 	},
 };
 
-module.exports = Board;
+export default Board;

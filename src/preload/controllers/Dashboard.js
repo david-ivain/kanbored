@@ -1,7 +1,7 @@
-const { ipcRenderer } = require("electron");
-const BoardAPI = require("../api/BoardAPI");
+import { ipcRenderer } from "electron";
+import BoardAPI from "../api/BoardAPI";
 
-/** @type {View<{}>} */
+/** @type {View<undefined>} */
 const Dashboard = {
 	async get() {
 		const boards = await BoardAPI.get();
@@ -12,4 +12,4 @@ const Dashboard = {
 	},
 };
 
-module.exports = Dashboard;
+export default Dashboard;

@@ -1,28 +1,53 @@
-/** @type {MainAPI} */
-const mainAPI = window.api;
-/** @type {ViewAPI} */
-const views = window.views;
+import { toHTMLElementOrNull } from "./renderer/utils/Utils";
+
 import "./index.css";
 
-views.dashboard.get().then((response) => (document.body.innerHTML = response));
+/** @type {Controller} */
+const views = window.views;
 
-const eventHandlers = {
+/**
+ * Loads a view from the main process
+ * @param { "dashboard" | "board" } view
+ * @param {{
+ * method: "get" | "post" | "put" | "delete";
+ * payload: Object;
+ * }} params
+ * @param { HTMLElement } target
+ */
+function loadView(view, params = {}, target = document.body) {
+	const defaultParams = { method: "get", payload: {} };
+	const mergedParams = { ...defaultParams, ...params };
+	views[view]?.[mergedParams.method]?.(mergedParams.payload).then(
+		(response) => (target.innerHTML = response)
+	);
+}
+
+/**
+ * Complete list of event handlers.
+ * Most of them should be event type agnostic.
+ */
+const eventHandlers = Object.freeze({
 	showDashboard() {
-		views.dashboard
-			.get()
-			.then((response) => (document.body.innerHTML = response));
+		loadView("dashboard");
 	},
 	/** @param {MouseEvent} event */
 	showBoard(event) {
-		// alert(event.target.dataset.id);
-		views.board
-			.get(event.target.dataset.id)
-			.then((response) => (document.body.innerHTML = response));
+		loadView("board", {
+			payload: { id: toHTMLElementOrNull(event.target)?.dataset.id },
+		});
 	},
-};
+});
 
-const supportedEventTypes = ["click"];
+/**
+ * List of supported event types for data-[event] elements
+ */
+const supportedEventTypes = Object.freeze(["click"]);
 
+/**
+ * Applies event listeners to document calling the corresponding handler for each valid element in the stack between it and the target element.
+ * Should probably implement some way to stop the bubbling.
+ * i.e. return false to stop
+ */
 supportedEventTypes.forEach((supportedEventType) => {
 	document.addEventListener(supportedEventType, (event) => {
 		if (!event.target || !(event.target instanceof HTMLElement)) return;
@@ -37,3 +62,10 @@ supportedEventTypes.forEach((supportedEventType) => {
 		}
 	});
 });
+
+/**
+ * Rendering process starting point.
+ */
+(function init() {
+	loadView("dashboard");
+})();

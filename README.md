@@ -12,8 +12,8 @@ Planned features:
 -   custom tags
 -   media saving
 -   versioning
--   task dependency (task > task, version > task, cross project ie engine > game)
--   backup (ie zip import/export)
+-   task dependency (task > task, version > task, cross project i.e. engine > game)
+-   backup (i.e. zip import/export)
 
 ## How to build
 

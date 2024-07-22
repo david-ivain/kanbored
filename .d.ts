@@ -1,17 +1,21 @@
-type MainAPI = {
-	boards: API<Board>;
-};
-
 type API<T extends Object> = {
-	get: (id: string?) => Promise<T[]>;
+	get: (id?: string) => Promise<T[]>;
 };
 
-type ViewAPI = {
-	dashboard: View<{}>;
+type Controller = {
+	[key: string]: View;
 };
 
-type View<Args extends Object> = {
-	get: (args: Args) => Promise<string>;
+type View<
+	GetArgs extends Object = {} | undefined,
+	PostArgs extends Object = {} | undefined,
+	PutArgs extends Object = {} | undefined,
+	DeleteArgs extends Object = {} | undefined
+> = {
+	get?: (args: GetArgs) => Promise<string>;
+	post?: (args: PostArgs) => Promise<string>;
+	put?: (args: PutArgs) => Promise<string>;
+	delete?: (args: DeleteArgs) => Promise<string>;
 };
 
 type Board = {
