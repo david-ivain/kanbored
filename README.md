@@ -15,6 +15,11 @@ Planned features:
 -   task dependency (task > task, version > task, cross project i.e. engine > game)
 -   backup (i.e. zip import/export)
 
+## Screenshots
+
+![Home](./README/screenshot_home.png)
+![Board](./README/screenshot_board.png)
+
 ## How to build
 
 To start the project:

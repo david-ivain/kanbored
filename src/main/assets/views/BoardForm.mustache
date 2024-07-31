@@ -1,0 +1,27 @@
+<dialog class="p-4 rounded-md border border-border backdrop:bg-black backdrop:opacity-50">
+	<form method="dialog" action="/modals/boardform{{# id }}/{{ id }}{{/ id }}" data-submit="submitModalForm" data-method="{{ method }}" class="grid grid-cols-3 gap-2">
+		<label for="createBoardId" class="py-1">ID*</label>
+		{{# id }}
+		<input type="text" name="id" id="createBoardId" required readonly value="{{ id }}" tabindex="-1" class="bg-bgreadonly border border-brdreadonly rounded py-1 px-2 col-span-2">
+		{{/ id }}
+		{{^ id }}
+		<input type="text" name="id" id="createBoardId" required autofocus value="{{ id }}" class="bg-lightbg border border-border rounded py-1 px-2 col-span-2">
+		{{/ id }}
+		<label for="createBoardName" class="py-1">Name*</label>
+		{{# id }}
+		<input type="text" name="name" id="createBoardName" required value="{{ name }}" autofocus class="bg-lightbg border border-border rounded py-1 px-2 col-span-2">
+		{{/ id }}
+		{{^ id }}
+		<input type="text" name="name" id="createBoardName" required value="{{ name }}" class="bg-lightbg border border-border rounded py-1 px-2 col-span-2">
+		{{/ id }}
+		<label for="createBoardDescription" class="col-span-3 py-1">Description</label>
+		<textarea name="description" id="createBoardDescription" class="col-span-3 bg-lightbg border border-border rounded font-mono p-2 resize-none" rows="8">{{ description }}</textarea>
+		{{# id }}
+		<button type="submit" class="rounded px-4 p-2 text-base leading-none before:content-['+\0020'] bg-accent text-lightbg hover:bg-hover col-span-2">Update</button>
+		{{/ id }}
+		{{^ id }}
+		<button type="submit" class="rounded px-4 p-2 text-base leading-none before:content-['+\0020'] bg-accent text-lightbg hover:bg-hover col-span-2">Create</button>
+		{{/ id }}
+		<button type="button" data-click="closeModal" class="rounded px-4 p-2 text-base leading-none before:content-['✕\0020'] bg-lightbg text-primarytext border border-border">Close</button>
+	</form>
+</dialog>

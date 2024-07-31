@@ -24,11 +24,14 @@ module.exports = {
 				border: "#DFE1E6",
 				lightbg: "#FAFBFC",
 				darkbg: "#091E42",
+				brdreadonly: "transparent",
+				bgreadonly: "transparent",
+			},
+			gridTemplateColumns: {
+				form: "1fr 2fr",
 			},
 		},
 	},
-	variants: {},
-	plugins: [],
 	safelist: [
 		"bg-feature",
 		"bg-bug",
@@ -41,5 +44,8 @@ module.exports = {
 		"border-wip",
 		"border-review",
 		"border-done",
+		"border-brdreadonly",
+		"bg-bgreadonly",
+		"font-mono",
 	],
 };

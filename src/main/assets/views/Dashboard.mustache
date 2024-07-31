@@ -1,6 +1,6 @@
 {{> header }}
 <div class="flex px-4 pt-4 gap-2">
-	<button type="button" class="rounded px-4 p-2 text-base leading-none before:content-['+\0020'] bg-accent text-lightbg hover:bg-hover">New</button>
+	<button type="button" data-click="showBoardForm" class="rounded px-4 p-2 text-base leading-none before:content-['+\0020'] bg-accent text-lightbg hover:bg-hover">New</button>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2 p-4">
 	{{#boards}}
@@ -12,3 +12,4 @@
 	</div>
 	{{/boards}}
 </div>
+<div id="modal-area"></div>

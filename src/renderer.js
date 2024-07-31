@@ -1,26 +1,11 @@
 import { toHTMLElementOrNull } from "./renderer/utils/Utils";
+import { ElResponse, ElRouterAPI } from "./preload/ElectronRouting";
 
 import "./index.css";
 
-/** @type {Controller} */
-const views = window.views;
-
-/**
- * Loads a view from the main process
- * @param { "dashboard" | "board" } view
- * @param {{
- * method: "get" | "post" | "put" | "delete";
- * payload: Object;
- * }} params
- * @param { HTMLElement } target
- */
-function loadView(view, params = {}, target = document.body) {
-	const defaultParams = { method: "get", payload: {} };
-	const mergedParams = { ...defaultParams, ...params };
-	views[view]?.[mergedParams.method]?.(mergedParams.payload).then(
-		(response) => (target.innerHTML = response)
-	);
-}
+/** @type {ElRouterAPI} */
+// @ts-ignore
+const api = window.api;
 
 /**
  * Complete list of event handlers.
@@ -28,20 +13,63 @@ function loadView(view, params = {}, target = document.body) {
  */
 const eventHandlers = Object.freeze({
 	showDashboard() {
-		loadView("dashboard");
+		api.get("/dashboard").then((response) => {
+			document.body.innerHTML = response.content();
+		});
 	},
 	/** @param {MouseEvent} event */
 	showBoard(event) {
-		loadView("board", {
-			payload: { id: toHTMLElementOrNull(event.target)?.dataset.id },
+		const boardId = toHTMLElementOrNull(event.target)?.dataset.id;
+		api.get(`/board/${boardId}`).then((response) => {
+			document.body.innerHTML = response.content();
 		});
+	},
+	showBoardForm() {
+		const modalArea = document.querySelector("#modal-area");
+		if (!(modalArea instanceof HTMLElement)) {
+			console.error("MODAL AREA NOT FOUND");
+			return;
+		}
+		api.get("/modals/boardform").then((response) => {
+			modalArea.innerHTML = response.content();
+			document.querySelector("dialog")?.showModal();
+		});
+	},
+	/** @param {MouseEvent} event */
+	closeModal(event) {
+		const dialog = toHTMLElementOrNull(event.target)?.closest("dialog");
+		dialog?.close();
+		dialog?.remove();
+	},
+	/** @param {SubmitEvent} event */
+	async submitModalForm(event) {
+		if (!(event.target instanceof HTMLFormElement)) return;
+		const formData = new FormData(event.target);
+		const values = {};
+		formData.forEach((value, key) => {
+			values[key] = value;
+		});
+
+		let method = event.target.dataset.method;
+		if (method !== "post" && method !== "put") {
+			console.error(`bad method ${method}`);
+			return;
+		}
+		const action = event.target.attributes.getNamedItem("action")?.value;
+		if (!action) {
+			console.error("no form action");
+			return;
+		}
+		const response = await api[method](action, values);
+		if (response.status() === "200") this.showDashboard();
+		else console.error(JSON.parse(response.content()).error);
 	},
 });
 
 /**
  * List of supported event types for data-[event] elements
  */
-const supportedEventTypes = Object.freeze(["click"]);
+const supportedEventTypes = Object.freeze(["click", "submit"]);
 
 /**
  * Applies event listeners to document calling the corresponding handler for each valid element in the stack between it and the target element.
@@ -53,12 +81,13 @@ supportedEventTypes.forEach((supportedEventType) => {
 		if (!event.target || !(event.target instanceof HTMLElement)) return;
 		let eventTarget = event.target.closest(`[data-${supportedEventType}]`);
 		while (eventTarget) {
-			const eventClone = Object.assign({}, event);
-			eventClone.target = eventTarget;
-			eventHandlers[eventClone.target.dataset.click]?.(eventClone);
-			eventTarget = eventClone.target.parentElement?.closest(
-				`[data-${supportedEventType}]`
-			);
+			Object.defineProperty(event, "target", { value: eventTarget });
+			// @ts-ignore
+			eventHandlers[event.target.dataset[supportedEventType]]?.(event);
+			eventTarget =
+				event.target.parentElement?.closest(
+					`[data-${supportedEventType}]`
+				) ?? null;
 		}
 	});
 });
@@ -67,5 +96,7 @@ supportedEventTypes.forEach((supportedEventType) => {
  * Rendering process starting point.
  */
 (function init() {
-	loadView("dashboard");
+	api.get("/dashboard").then((response) => {
+		document.body.innerHTML = response.content();
+	});
 })();
